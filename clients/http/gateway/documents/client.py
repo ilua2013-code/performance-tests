@@ -1,6 +1,29 @@
+from typing import TypedDict
 from httpx import Response
 from clients.http.gateway.client import build_gateway_http_client
 from clients.http.client import HTTPClient
+
+
+class DocumentDict(TypedDict):
+    """
+    Описание структуры документа.
+    """
+    url: str
+    document: str
+
+
+class GetTariffDocumentResponseDict(TypedDict):
+    """
+    Описание структуры ответа для документа тарифа.
+    """
+    tariff: DocumentDict
+
+
+class GetContractDocumentResponseDict(TypedDict):
+    """
+    Описание структуры ответа для документа контракта.
+    """
+    contract:DocumentDict
 
 
 class DocumentsGatewayHTTPClient(HTTPClient):
@@ -26,6 +49,31 @@ class DocumentsGatewayHTTPClient(HTTPClient):
         """
         return self.get(f"/api/v1/documents/contract-document/{account_id}")
     
+    def get_tariff_document(self, account_id: str) -> GetTariffDocumentResponseDict:
+        """
+        Получить документ тарифа по счету.
+    
+        Высокоуровневый метод, который возвращает типизированные данные документа тарифа.
+    
+        : param account_id: Идентификатор счета.
+        :return: Словарь с документом тарифа в структуре GetTariffDocumentResponseDict.
+        """
+        response = self.get_tariff_document_api(account_id)
+        return response.json()
+
+    def get_contract_document(self, account_id: str) -> GetContractDocumentResponseDict:
+        """
+        Получить документ контракта по счету.
+    
+        Высокоуровневый метод, который возвращает типизированные данные документа контракта.
+    
+        :param account_id: Идентификатор счета.
+        :return: Словарь с документом контракта в структуре GetContractDocumentResponseDict.
+        """
+        response = self.get_contract_document_api(account_id)
+        return response.json()
+
+
 def build_documents_gateway_http_client() -> DocumentsGatewayHTTPClient:
     """
     Функция создаёт экземпляр DocumentsGatewayHTTPClient с уже настроенным HTTP-клиентом.
