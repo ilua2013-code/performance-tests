@@ -9,12 +9,12 @@ documents_gateway_client = build_documents_gateway_http_client()
 
 # Создание пользователя
 create_user = users_gateway_client.create_user()
-user_id = create_user["user"]["id"]
+user_id = create_user.user.id
 print(f"Create user response: {create_user}")
 
 # Открытие кредитного счета для пользователя
 create_account = accounts_gateway_client.open_credit_card_account(user_id)
-account_id = create_account["account"]["id"]
+account_id = create_account.account.id
 print(f"Open credit card account response: {create_account}")
 
 # Получение документа тарифа по счету
