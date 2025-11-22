@@ -2,78 +2,113 @@ from grpc import Channel
 
 from clients.grpc.client import GRPCClient
 from clients.grpc.gateway.client import build_gateway_grpc_client
-from contracts.services.gateway.cards.cards_gateway_service_pb2_grpc import CardsGatewayServiceStub
-from contracts.services.gateway.cards.rpc_issue_virtual_card_pb2 import IssueVirtualCardRequest, IssueVirtualCardResponse
-from contracts.services.gateway.cards.rpc_issue_physical_card_pb2 import IssuePhysicalCardRequest, IssuePhysicalCardResponse
+from contracts.services.gateway.accounts.accounts_gateway_service_pb2_grpc import AccountsGatewayServiceStub
+from contracts.services.gateway.accounts.rpc_get_accounts_pb2 import GetAccountsRequest, GetAccountsResponse
+from contracts.services.gateway.accounts.rpc_open_credit_card_account_pb2 import (
+    OpenCreditCardAccountRequest,
+    OpenCreditCardAccountResponse
+)
+from contracts.services.gateway.accounts.rpc_open_debit_card_account_pb2 import (
+    OpenDebitCardAccountRequest,
+    OpenDebitCardAccountResponse
+)
+from contracts.services.gateway.accounts.rpc_open_deposit_account_pb2 import (
+    OpenDepositAccountRequest,
+    OpenDepositAccountResponse
+)
+from contracts.services.gateway.accounts.rpc_open_savings_account_pb2 import (
+    OpenSavingsAccountRequest,
+    OpenSavingsAccountResponse
+)
 
-
-class CardsGatewayGRPCClient(GRPCClient):
+class AccountsGatewayGRPCClient(GRPCClient):
     """
-    gRPC-клиент для взаимодействия с CardsGatewayService.
-    Предоставляет методы для выпуска виртуальных и физических карт.
+    gRPC-клиент для взаимодействия с AccountsGatewayService.
+    Предоставляет высокоуровневые методы для работы со счетами.
     """
 
     def __init__(self, channel: Channel):
         """
         Инициализация клиента с указанным gRPC-каналом.
 
-        :param channel: gRPC-канал для подключения к CardsGatewayService.
+        :param channel: gRPC-канал для подключения к AccountsGatewayService.
         """
         super().__init__(channel)
         
-        self.stub = CardsGatewayServiceStub(channel)  # gRPC-стаб, сгенерированный из .proto
+        self.stub = AccountsGatewayServiceStub(channel)  
 
-    def issue_virtual_card_api(self, request: IssueVirtualCardRequest) -> IssueVirtualCardResponse:
+    def get_accounts_api(self, request: GetAccountsRequest) -> GetAccountsResponse:
         """
-        Низкоуровневый вызов метода IssueVirtualCard через gRPC.
+        Низкоуровневый вызов метода GetAccounts через gRPC.
 
-        :param request: gRPC-запрос с данными для выпуска виртуальной карты.
-        :return: Ответ от сервиса с данными созданной виртуальной карты.
+        :param request: gRPC-запрос с ID пользователя.
+        :return: Ответ от сервиса с данными об аккаунте.
         """
-        return self.stub.IssueVirtualCard(request)
+        return self.stub.GetAccounts(request)
 
-    def issue_physical_card_api(self, request: IssuePhysicalCardRequest) -> IssuePhysicalCardResponse:
+    def open_deposit_account_api(self, request: OpenDepositAccountRequest) -> OpenDepositAccountResponse:
         """
-        Низкоуровневый вызов метода IssuePhysicalCard через gRPC.
+        Низкоуровневый вызов метода OpenDepositAccount через gRPC.
 
-        :param request: gRPC-запрос с данными для выпуска физической карты.
-        :return: Ответ от сервиса с данными созданной физической карты.
+        :param request: gRPC-запрос с ID пользователя.
+        :return: Ответ от сервиса с данными открытого депозитного счета.
         """
-        return self.stub.IssuePhysicalCard(request)
+        return self.stub.OpenDepositAccount(request)
 
-    def issue_virtual_card(self, user_id: str, account_id: str) -> IssueVirtualCardResponse:
+    def open_savings_account_api(self, request: OpenSavingsAccountRequest) -> OpenSavingsAccountResponse:
         """
-        Выпуск виртуальной карты для пользователя и счета.
+        Низкоуровневый вызов метода OpenSavingsAccount через gRPC.
 
-        :param user_id: Идентификатор пользователя.
-        :param account_id: Идентификатор счета.
-        :return: Ответ с информацией о выпущенной виртуальной карте.
+        :param request: gRPC-запрос с ID пользователя.
+        :return: Ответ от сервиса с данными открытого сберегательного счета.
         """
-        request = IssueVirtualCardRequest(
-            user_id=user_id,
-            account_id=account_id
-            )
-        return self.issue_virtual_card_api(request)
+        return self.stub.OpenSavingsAccount(request)
 
-    def issue_physical_card(self, user_id: str, account_id: str) -> IssuePhysicalCardResponse:
+    
+    def open_debit_card_account_api(self, request: OpenDebitCardAccountRequest) -> OpenDebitCardAccountResponse:
         """
-        Выпуск физической карты для пользователя и счета.
+        Низкоуровневый вызов метода OpenDebitCardAccount через gRPC.
 
-        :param user_id: Идентификатор пользователя.
-        :param account_id: Идентификатор счета.
-        :return: Ответ с информацией о выпущенной физической карте.
+        :param request: gRPC-запрос с ID пользователя.
+        :return: Ответ от сервиса с данными открытого дебетового счета.
         """
-        request = IssuePhysicalCardRequest(
-            user_id=user_id,
-            account_id=account_id
-            )
-        return self.issue_physical_card_api(request)
+        return self.stub.OpenDebitCardAccount(request)
 
 
-def build_cards_gateway_grpc_client() -> CardsGatewayGRPCClient:
+    def open_credit_card_account_api(self, request: OpenCreditCardAccountRequest) -> OpenCreditCardAccountResponse:
+        """
+        Низкоуровневый вызов метода OpenCreditCardAccount через gRPC.
+
+        :param request: gRPC-запрос с ID пользователя.
+        :return: Ответ от сервиса с данными открытого кредитного счета.
+        """
+        return self.stub.OpenCreditCardAccount(request)
+
+    def get_accounts(self, user_id: str) -> GetAccountsResponse:
+        request = GetAccountsRequest(user_id = user_id)
+        return self.get_accounts_api(request)
+    
+    def open_deposit_account(self, user_id: str) -> OpenDepositAccountResponse:
+        request = OpenDepositAccountRequest(user_id = user_id)
+        return self.open_deposit_account_api(request)
+
+    def open_savings_account(self, user_id: str) -> OpenSavingsAccountResponse:
+        request = OpenSavingsAccountRequest(user_id = user_id)
+        return self.open_savings_account_api(request)
+    
+    def open_debit_card_account(self, user_id: str) -> OpenDebitCardAccountResponse:
+        request = OpenDebitCardAccountRequest(user_id = user_id)
+        return self.open_debit_card_account_api(request)
+    
+    def open_credit_card_account(self, user_id: str) -> OpenCreditCardAccountResponse:
+        request = OpenCreditCardAccountRequest(user_id = user_id)
+        return self.open_credit_card_account_api(request)
+
+
+def build_accounts_gateway_grpc_client() -> AccountsGatewayGRPCClient:
     """
-    Фабрика для создания экземпляра CardsGatewayGRPCClient.
+    Фабрика для создания экземпляра AccountsGatewayGRPCClient.
 
-    :return: Инициализированный клиент для CardsGatewayService.
+    :return: Инициализированный клиент для AccountsGatewayService.
     """
-    return CardsGatewayGRPCClient(channel=build_gateway_grpc_client())
+    return AccountsGatewayGRPCClient(channel=build_gateway_grpc_client())
