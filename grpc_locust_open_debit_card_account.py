@@ -15,8 +15,8 @@ class OpenDebitCardAccountScenarioUser(User):
     
     def on_start(self) -> None:
         """
-        Метод on_start вызывается один раз при запуске каждой сессии виртуального пользователя.
-        Здесь мы создаем нового пользователя, отправляя POST-запрос к /api/v1/users.
+        Метод, вызываемый при старте каждого виртуального пользователя.
+        Здесь происходит инициализация gRPC API клиента и создание пользователя.
         """
         # Шаг 1: создаем API клиент, встроенный в экосистему Locust (с хуками и поддержкой сбора метрик)
         self.users_gateway_client = build_users_gateway_locust_grpc_client(self.environment)
@@ -28,8 +28,8 @@ class OpenDebitCardAccountScenarioUser(User):
     @task
     def open_debit_card(self):
         """
-        Основная нагрузочная задача: открытие дебетовой карты.
-        Здесь мы выполняем POST-запрос к /api/v1/accounts/open-debit-card-account.
+        Основная задача виртуального пользователя — открытие дебетовой карты.
+        Метод будет многократно вызываться Locust-агентами.
         """
         
         # Шаг 3: открытие дебетовой карты через API
