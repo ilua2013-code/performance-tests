@@ -35,13 +35,3 @@ class GetUserScenarioUser(User):  # Наследуемся от User вмест�
         self.users_gateway_client.get_user(self.create_user_response.user.id)
 
 
-from clients.http.gateway.users.schema import CreateUserResponseSchema
-import psutil
-import platform
-
-# Диагностика системы
-print("=== SYSTEM DIAGNOSTICS ===")
-print(f"CPU: {psutil.cpu_count()} cores")
-print(f"RAM: {psutil.virtual_memory().total / 1024**3:.1f} GB")
-print(f"System: {platform.system()} {platform.release()}")
-print(f"Python: {platform.python_version()}")
