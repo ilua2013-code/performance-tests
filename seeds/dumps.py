@@ -8,7 +8,7 @@ def save_seeds_result(result: SeedsResult, scenario: str):
     if not os.path.exists("dumps"):
         os.mkdir("dumps")
 
-    with open(f"./dumps/{scenario}.seeds.json", "w", encoding="utf-8") as file:
+    with open(f"./dumps/{scenario}.seeds.json", "w+", encoding="utf-8") as file:
         file.write(result.model_dump_json(indent=2))
 
 
