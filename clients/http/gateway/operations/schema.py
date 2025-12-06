@@ -172,43 +172,43 @@ class GetOperationsSummaryResponseSchema(BaseModel):
     """
     summary: OperationsSummarySchema
 
-class CreateFeeOperationResponseSchema(BaseModel):
+class MakeFeeOperationResponseSchema(BaseModel):
     """
     Структура ответа операции списания комиссии.
     """
     operation: OperationSchema
 
-class CreateTopUpOperationResponseSchema(BaseModel):
+class MakeTopUpOperationResponseSchema(BaseModel):
     """
     Структура ответа операции пополнения.
     """
     operation: OperationSchema
 
-class CreateCashbackOperationResponseSchema(BaseModel):
+class MakeCashbackOperationResponseSchema(BaseModel):
     """
     Структура ответа операции кэшбэка.
     """
     operation: OperationSchema
 
-class CreateTransferOperationResponseSchema(BaseModel):
+class MakeTransferOperationResponseSchema(BaseModel):
     """
     Структура ответа операции перевода.
     """
     operation: OperationSchema
 
-class CreatePurchaseOperationResponseSchema(BaseModel):
+class MakePurchaseOperationResponseSchema(BaseModel):
     """
     Структура ответа операции создания покупки.
     """
     operation: OperationSchema
 
-class CreateBillPaymentOperationResponseSchema(BaseModel):
+class MakeBillPaymentOperationResponseSchema(BaseModel):
     """
     Структура ответа операции оплаты по счету.
     """
     operation: OperationSchema
 
-class CreateCashWithdrawalOperationResponseSchema(BaseModel):
+class MakeCashWithdrawalOperationResponseSchema(BaseModel):
     """
     Структура ответа операции снятия наличных.
     """
