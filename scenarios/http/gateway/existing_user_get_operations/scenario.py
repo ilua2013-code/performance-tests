@@ -10,13 +10,6 @@ from tools.locust.user import LocustBaseUser
 # Хук инициализации — вызывается перед началом запуска нагрузки
 @events.init.add_listener
 def init(environment: Environment, **kwargs):
-    """
-    Инициализация тестовых данных перед запуском нагрузки.
-    Используем ExistingUserGetOperationsSeedsScenario для создания:
-    - 300 пользователей
-    - Каждому по 1 кредитному счету
-    - На каждом счету: 5 покупок, 1 пополнение, 1 снятие наличных
-    """
     seeds_scenario = ExistingUserGetOperationsSeedsScenario()
     seeds_scenario.build()  # создаём пользователей, счета, карты и операции
 
