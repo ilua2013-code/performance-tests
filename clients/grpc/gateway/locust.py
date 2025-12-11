@@ -39,7 +39,7 @@ class GatewayGRPCTaskSet(TaskSet):
         self.documents_gateway_client = build_documents_gateway_locust_grpc_client(self.user.environment)
         self.operations_gateway_client = build_operations_gateway_locust_grpc_client(self.user.environment)
 
-class GatewayGRPCequentialTaskSet(SequentialTaskSet):
+class GatewayGRPCSequentialTaskSet(SequentialTaskSet):
     """
     Базовый SequentialTaskSet для HTTP-сценариев, где важен порядок выполнения задач.
 
