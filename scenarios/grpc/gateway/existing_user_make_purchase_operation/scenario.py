@@ -1,7 +1,7 @@
 from locust import task, events
 from locust.env import Environment
 
-from clients.http.gateway.locust import GatewayHTTPTaskSet
+from clients.grpc.gateway.locust import GatewayGRPCTaskSet
 from seeds.scenarios.existing_user_make_purchase_operation import ExistingUserMakePurchaseOperationSeedsScenario
 from seeds.schema.result import SeedUserResult
 from tools.locust.user import LocustBaseUser
@@ -19,7 +19,7 @@ def init(environment: Environment, **kwargs):
 
 
 # TaskSet — сценарий пользователя. Каждый виртуальный пользователь выполняет эти задачи
-class MakePurchaseOperationTaskSet(GatewayHTTPTaskSet):
+class MakePurchaseOperationTaskSet(GatewayGRPCTaskSet):
     seed_user: SeedUserResult  # Типизированная ссылка на данные из сидинга
 
     def on_start(self) -> None:
