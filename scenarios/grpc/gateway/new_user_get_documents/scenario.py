@@ -1,20 +1,20 @@
 from locust import  task
 
 # Импортируем схемы ответов, чтобы типизировать shared state
+from clients.grpc.gateway.locust import GatewayGRPCSequentialTaskSet
 from clients.http.gateway.accounts.schema import OpenSavingsAccountResponseSchema
-from clients.http.gateway.locust import GatewayHTTPSequentialTaskSet
 from clients.http.gateway.users.schema import CreateUserResponseSchema
 from tools.locust.user import LocustBaseUser
 
 
-class GetDocumentsSequentialTaskSet(GatewayHTTPSequentialTaskSet):
+class GetDocumentsSequentialTaskSet(GatewayGRPCSequentialTaskSet):
     """
     Нагрузочный сценарий, который последовательно:
     1. Создаёт нового пользователя.
     2. Открывает сберегательный счёт.
     3. Получает документы по счёту (тариф и контракт).
 
-    Использует базовый GatewayHTTPSequentialTaskSet и уже созданных в нём API клиентов.
+    Использует базовый GatewayGRPCSequentialTaskSet и уже созданных в нём API клиентов.
     """
 
     

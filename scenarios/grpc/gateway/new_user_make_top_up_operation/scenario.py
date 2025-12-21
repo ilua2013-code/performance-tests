@@ -1,6 +1,6 @@
 from locust import task
 
-from clients.grpc.gateway.locust import GatewayGRPCequentialTaskSet
+from clients.grpc.gateway.locust import GatewayGRPCSequentialTaskSet
 from contracts.services.gateway.accounts.rpc_open_debit_card_account_pb2 import OpenDebitCardAccountResponse
 from contracts.services.gateway.operations.rpc_make_top_up_operation_pb2 import MakeTopUpOperationResponse
 from contracts.services.users.rpc_create_user_pb2 import CreateUserResponse
@@ -8,7 +8,7 @@ from tools.locust.user import LocustBaseUser
 
 
 # Класс сценария: описывает последовательный флоу нового пользователя
-class MakeTopUpOperationSequentialTaskSet(GatewayGRPCequentialTaskSet):
+class MakeTopUpOperationSequentialTaskSet(GatewayGRPCSequentialTaskSet):
     # Храним ответы от предыдущих шагов, чтобы использовать их в следующих задачах
     create_user_response: CreateUserResponse | None = None
     make_top_up_operation_response: MakeTopUpOperationResponse | None = None

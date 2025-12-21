@@ -2,12 +2,12 @@ from locust import  task
 
 
 from contracts.services.gateway.accounts.rpc_open_savings_account_pb2 import OpenSavingsAccountResponse
-from clients.grpc.gateway.locust import GatewayGRPCequentialTaskSet
+from clients.grpc.gateway.locust import GatewayGRPCSequentialTaskSet
 from contracts.services.gateway.users.rpc_create_user_pb2 import CreateUserResponse
 from tools.locust.user import LocustBaseUser
 
 
-class GetDocumentsSequentialTaskSet(GatewayGRPCequentialTaskSet):
+class GetDocumentsSequentialTaskSet(GatewayGRPCSequentialTaskSet):
     """
     Нагрузочный сценарий, который последовательно:
     1. Создаёт нового пользователя.
