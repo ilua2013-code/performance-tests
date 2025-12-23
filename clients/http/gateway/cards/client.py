@@ -8,6 +8,7 @@ from clients.http.gateway.client import build_gateway_http_client, build_gateway
 from httpx import Response
 
 from clients.http.client import HTTPClient
+from tools.routes import APIRoutes
 
 
 
@@ -24,7 +25,7 @@ class CardsGatewayHTTPClient(HTTPClient):
         :return: Ответ от сервера с данными созданной виртуальной карты.
         """
         return self.post(
-            "/api/v1/cards/issue-virtual-card",
+            f"{APIRoutes.CARDS}/issue-virtual-card",
             json=request.model_dump(by_alias=True))
 
     def issue_physical_card_api(self, request: IssuePhysicalCardRequestSchema) -> Response:
@@ -35,7 +36,7 @@ class CardsGatewayHTTPClient(HTTPClient):
         :return: Ответ от сервера с данными созданной физической карты.
         """
         return self.post(
-            "/api/v1/cards/issue-physical-card", 
+            f"{APIRoutes.CARDS}/issue-physical-card", 
             json=request.model_dump(by_alias=True))
     
     # Добавили новый метод
