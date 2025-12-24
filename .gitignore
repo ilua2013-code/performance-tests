@@ -1,29 +1,15 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-*.egg-info/
-.installed.cfg
-*.egg
+# pycharm
+.idea
 
-# Virtual environments
+# python
 .venv
-venv/
-ENV/
+__pycache__
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
+# locust
+dumps
+locust_*.csv
+locust_*.json
+report.html
 
-# OS
+# Mac OS
 .DS_Store
-Thumbs.db
-
-# Logs
-*.log
