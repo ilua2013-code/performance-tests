@@ -1,0 +1,7 @@
+name: Perfomance Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      SCENARIO:
+        type: "choice"
