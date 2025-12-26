@@ -41,7 +41,7 @@ jobs:
           python-version: '3.12'
 
       - name: Clone test services
-        run: git clone https://github.com/ilua2013-code/performance-tests
+        run: git clone https://github.com/ilua2013-code/performance-qa-engineer-course
 
       - name: Build base Docker image
         run: docker build -f Dockerfile.base -t base-service .
