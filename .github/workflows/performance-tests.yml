@@ -105,6 +105,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}  # Авторизация для push в gh-pages
           keep_files: true  # Сохраняем предыдущие отчёты
           publish_dir: .  # Публикуем директорию reports
+          destination_dir: ${{ github.run_id }}
           publish_branch: gh-pages  # На ветке gh-pages
 
       
